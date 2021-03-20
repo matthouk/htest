@@ -41,7 +41,6 @@ async def model_predict(data: List[rf]):
     df = pd.DataFrame([dict(item) for item in data])
     model = joblib.load('model.pkl')
     prediction = model.predict_proba(df)
-    print("This is a test output")
     return Response(prediction)
 
 if __name__ == '__main__': 
