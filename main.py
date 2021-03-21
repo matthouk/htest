@@ -1,6 +1,7 @@
 import pandas as pd
 import uvicorn
 import joblib 
+import json
 from sklearn.ensemble import RandomForestClassifier
 import xgboost 
 from typing import List
@@ -41,8 +42,12 @@ async def model_predict(data: List[rf]):
     df = pd.DataFrame([dict(item) for item in data])
     model = joblib.load('model.pkl')
     prediction = model.predict_proba(df)
-    return Response(prediction)
+    print(prediction)
+
+    predsiction_json = json.dumps(prediction.tolist())
+
+    return Response(prediction_json)
 
 if __name__ == '__main__': 
-        uvicorn.run(app, host='127.0.0.1', port=8006)
+        uvicorn.run('main:app', host='127.0.0.1', port=8006, reload=True)
 
