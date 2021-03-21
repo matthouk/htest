@@ -44,7 +44,7 @@ async def model_predict(data: List[rf]):
     prediction = model.predict_proba(df)
     print(prediction)
 
-    predsiction_json = json.dumps(prediction.tolist())
+    prediction_json = json.dumps(prediction.tolist())
 
     return Response(prediction_json)
 
